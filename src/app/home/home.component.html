@@ -1,0 +1,42 @@
+<div class="container-fluid">
+    <div class="">
+        <form [formGroup]="searchFormGroup">
+            <div class="row justify-content-center">
+                <div class="col-md-3 mt-5 pt-3">
+                    <label class="mb-3 fw-semibold text-center w-100">Search Github User</label>
+                    <div class="form-group">
+                        <input class="inputBox form-control w-100" formControlName="search" [(ngModel)]="searchValue" placeholder="Name" name="fullName"/>
+                        <mat-error *ngIf="searchFormGroup && searchFormGroup.controls['search'].hasError('require')">
+                        Please enter some value
+                        </mat-error>
+                    </div>
+                    <button type="button" [disabled]="searchFormGroup.invalid" class="btn btn-success btn-block mt-3 text-center" (click)="getResults(searchValue)">Search</button>
+                </div>
+            </div>
+        </form>
+        <div *ngIf="results && results.length > 0">
+            <div class="row justify-content-center">
+                <div class="col-md-3 mt-3 mb-2">
+                    <label>Search results</label>
+                </div>
+            </div>
+            <div class="row justify-content-center" *ngFor="let item of results; let i = index">
+                <div class="col-md-3">
+                    <div class="row mx-0 mb-2 border border-1 rounded-1 border-opacity-50 pt-2 pb-3 bg-white">
+                        <div class="col">
+                            <label class="text-muted sm-text">User Image</label>
+                            <img src="{{item.avatar_url}}" height="80" width="80"/>
+                        </div>
+                        <div class="col-md-8">
+                            <label class="text-muted sm-text">Github User name</label>
+                            <div>{{item.login}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 text-center pt-2 pb-3">
+                <button type="button" class="btn btn-success col-md-2  text-center" (click)="clearHistory()">Clear History</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="container-fluid">
+  <div class="text-center mt-5 pt-3">
+    <label class="mb-5 fw-semibold">Your Search History</label>
+  </div>
+  <div *ngIf="results && results.length > 0">
+    <div  *ngFor="let item of results; let i = index">
+      <div class="row justify-content-center">
+        <div class="col-md-3 border border-1 border-opacity-50 mb-4 p-0 border-end-0 bg-white" style="border-right: none !important;">
+          <label class="w-100 p-2 bg-header text-muted">Search Term</label>
+          <p class="p-2">{{item.searchTerm}}</p>
+        </div>
+        <div class="col-md-3 border border-1 border-opacity-50 mb-4 p-0 border-start-0 bg-white" style="border-left: none !important">
+          <label class="w-100 p-2 bg-header text-muted">Search Results</label>
+          <div *ngIf="item.data.length > 0">
+            <div class="row mx-0 mb-2 pt-2 pb-3 flex-nowrap" *ngFor="let k of item.data; let j = index">
+              <div class="col">
+                <label class="text-muted sm-text">User Image</label>
+                <img src="{{k.avatar_url}}" height="100" width="100" />
+              </div>
+              <div class="col-md-8">
+                <label class="text-muted sm-text">Github User name</label>
+                <div>{{k.login}}</div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!item.data.length">
+            <label>Search result not found</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
